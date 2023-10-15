@@ -209,17 +209,18 @@ class NoiseScheduler:
                 sqrt_one_minus_alpha_prod, axis=-1
             )
         
-        sqrt_alpha_prod = tf.numpy(sqrt_alpha_prod, tf.float32)
-        original_samples = tf.numpy(original_samples, tf.float32)
+        # sqrt_alpha_prod = tf.cast(sqrt_alpha_prod, tf.float32)
+        # original_samples = tf.cast(original_samples, tf.float32)
+
+        print('1:',sqrt_alpha_prod.dtype)
+        print('2:',original_samples.dtype)
+        print('3:',sqrt_one_minus_alpha_prod.dtype)
+        print('4:',noise.dtype)
         
         noisy_samples = (
             sqrt_alpha_prod * original_samples
             + sqrt_one_minus_alpha_prod * noise
         )
-        print('1:',sqrt_alpha_prod.dtype)
-        print('2:',original_samples.dtype)
-        print('3:',sqrt_one_minus_alpha_prod.dtype)
-        print('4:',noise.dtype)
 
         return noisy_samples
 
