@@ -208,7 +208,10 @@ class NoiseScheduler:
             sqrt_one_minus_alpha_prod = ops.expand_dims(
                 sqrt_one_minus_alpha_prod, axis=-1
             )
-
+        
+        sqrt_alpha_prod = tf.cast(sqrt_alpha_prod, tf.float64)
+        original_samples = tf.cast(original_samples, tf.float64)
+        
         noisy_samples = (
             sqrt_alpha_prod * original_samples
             + sqrt_one_minus_alpha_prod * noise
