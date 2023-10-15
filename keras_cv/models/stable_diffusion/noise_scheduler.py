@@ -211,6 +211,7 @@ class NoiseScheduler:
         
         sqrt_alpha_prod = tf.cast(sqrt_alpha_prod, tf.float64)
         original_samples = tf.cast(original_samples, tf.float64)
+        noise = tf.cast(noise, tf.float64)
 
         print('1:',sqrt_alpha_prod.dtype)
         print('2:',original_samples.dtype)
