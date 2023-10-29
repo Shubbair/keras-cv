@@ -26,7 +26,7 @@ class DiffusionModel(keras.Model):
         img_width,
         max_text_length,
         name=None,
-        weights_path,
+        weights_path=None,
     ):
         context = keras.layers.Input((max_text_length, 768), name="context")
         t_embed_input = keras.layers.Input((320,), name="timestep_embedding")
@@ -115,7 +115,7 @@ class DiffusionModel(keras.Model):
         #     )
         #     self.load_weights(diffusion_model_weights_fpath)
 
-        self.load_weights(self.weights_path)
+        self.load_weights(weights_path)
 
 
 class DiffusionModelV2(keras.Model):
