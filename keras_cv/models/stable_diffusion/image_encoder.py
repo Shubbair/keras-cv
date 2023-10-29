@@ -25,7 +25,7 @@ from keras_cv.models.stable_diffusion.resnet_block import ResnetBlock
 class ImageEncoder(keras.Sequential):
     """ImageEncoder is the VAE Encoder for StableDiffusion."""
 
-    def __init__(self, weights_path):
+    def __init__(self, weights_path=None):
         super().__init__(
             [
                 keras.layers.Input((None, None, 3)),
