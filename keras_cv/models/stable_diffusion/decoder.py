@@ -23,7 +23,7 @@ from keras_cv.models.stable_diffusion.resnet_block import ResnetBlock
 
 @keras_cv_export("keras_cv.models.stable_diffusion.Decoder")
 class Decoder(keras.Sequential):
-    def __init__(self, img_height, img_width, name=None, weights_path):
+    def __init__(self, img_height, img_width, name=None, weights_path=None):
         super().__init__(
             [
                 keras.layers.Input((img_height // 8, img_width // 8, 4)),
