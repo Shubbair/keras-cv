@@ -26,7 +26,7 @@ class DiffusionModel(keras.Model):
         img_width,
         max_text_length,
         name=None,
-        download_weights=True,
+        weights_path,
     ):
         context = keras.layers.Input((max_text_length, 768), name="context")
         t_embed_input = keras.layers.Input((320,), name="timestep_embedding")
@@ -107,12 +107,14 @@ class DiffusionModel(keras.Model):
 
         super().__init__([latent, t_embed_input, context], output, name=name)
 
-        if download_weights:
-            diffusion_model_weights_fpath = keras.utils.get_file(
-                origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_diffusion_model.h5",  # noqa: E501
-                file_hash="8799ff9763de13d7f30a683d653018e114ed24a6a819667da4f5ee10f9e805fe",  # noqa: E501
-            )
-            self.load_weights(diffusion_model_weights_fpath)
+        # if download_weights:
+        #     diffusion_model_weights_fpath = keras.utils.get_file(
+        #         origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_diffusion_model.h5",  # noqa: E501
+        #         file_hash="8799ff9763de13d7f30a683d653018e114ed24a6a819667da4f5ee10f9e805fe",  # noqa: E501
+        #     )
+        #     self.load_weights(diffusion_model_weights_fpath)
+
+        self.load_weights(weights_path)
 
 
 class DiffusionModelV2(keras.Model):
