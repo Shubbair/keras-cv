@@ -23,7 +23,7 @@ from keras_cv.models.stable_diffusion.resnet_block import ResnetBlock
 
 @keras_cv_export("keras_cv.models.stable_diffusion.Decoder")
 class Decoder(keras.Sequential):
-    def __init__(self, img_height, img_width, name=None, download_weights=True):
+    def __init__(self, img_height, img_width, name=None, weights_path):
         super().__init__(
             [
                 keras.layers.Input((img_height // 8, img_width // 8, 4)),
@@ -58,9 +58,12 @@ class Decoder(keras.Sequential):
             name=name,
         )
 
-        if download_weights:
-            decoder_weights_fpath = keras.utils.get_file(
-                origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_decoder.h5",  # noqa: E501
-                file_hash="ad350a65cc8bc4a80c8103367e039a3329b4231c2469a1093869a345f55b1962",  # noqa: E501
-            )
-            self.load_weights(decoder_weights_fpath)
+        # if download_weights:
+        #     decoder_weights_fpath = keras.utils.get_file(
+        #         origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_decoder.h5",  # noqa: E501
+        #         file_hash="ad350a65cc8bc4a80c8103367e039a3329b4231c2469a1093869a345f55b1962",  # noqa: E501
+        #     )
+        #     self.load_weights(decoder_weights_fpath)
+
+        self.load_weights(weights_path)
+        
