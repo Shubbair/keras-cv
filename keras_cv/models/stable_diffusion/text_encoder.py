@@ -20,7 +20,7 @@ from keras_cv.backend import ops
 @keras_cv_export("keras_cv.models.stable_diffusion.TextEncoder")
 class TextEncoder(keras.Model):
     def __init__(
-        self, max_length, vocab_size=49408, name=None, download_weights=True
+        self, max_length, vocab_size=49408, name=None, weights_path
     ):
         tokens = keras.layers.Input(
             shape=(max_length,), dtype="int32", name="tokens"
@@ -34,12 +34,14 @@ class TextEncoder(keras.Model):
         embedded = keras.layers.LayerNormalization(epsilon=1e-5)(x)
         super().__init__([tokens, positions], embedded, name=name)
 
-        if download_weights:
-            text_encoder_weights_fpath = keras.utils.get_file(
-                origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_encoder.h5",  # noqa: E501
-                file_hash="4789e63e07c0e54d6a34a29b45ce81ece27060c499a709d556c7755b42bb0dc4",  # noqa: E501
-            )
-            self.load_weights(text_encoder_weights_fpath)
+        # if download_weights:
+        #     text_encoder_weights_fpath = keras.utils.get_file(
+        #         origin="https://huggingface.co/fchollet/stable-diffusion/resolve/main/kcv_encoder.h5",  # noqa: E501
+        #         file_hash="4789e63e07c0e54d6a34a29b45ce81ece27060c499a709d556c7755b42bb0dc4",  # noqa: E501
+        #     )
+        #     self.load_weights(text_encoder_weights_fpath)
+
+        self.load_weights(weights_path)
 
 
 @keras_cv_export("keras_cv.models.stable_diffusion.TextEncoderV2")
