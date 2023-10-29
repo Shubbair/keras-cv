@@ -20,7 +20,7 @@ from keras_cv.backend import ops
 @keras_cv_export("keras_cv.models.stable_diffusion.TextEncoder")
 class TextEncoder(keras.Model):
     def __init__(
-        self, max_length, vocab_size=49408, name=None, weights_path
+        self, max_length, vocab_size=49408, name=None, weights_path=None
     ):
         tokens = keras.layers.Input(
             shape=(max_length,), dtype="int32", name="tokens"
