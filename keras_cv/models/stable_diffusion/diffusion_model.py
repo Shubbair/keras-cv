@@ -33,6 +33,7 @@ class DiffusionModel(keras.Model):
         latent = keras.layers.Input(
             (img_height // 8, img_width // 8, 4), name="latent"
         )
+        self.weights_path = weights_path
 
         t_emb = keras.layers.Dense(1280)(t_embed_input)
         t_emb = keras.layers.Activation("swish")(t_emb)
@@ -114,7 +115,7 @@ class DiffusionModel(keras.Model):
         #     )
         #     self.load_weights(diffusion_model_weights_fpath)
 
-        self.load_weights(weights_path)
+        self.load_weights(self.weights_path)
 
 
 class DiffusionModelV2(keras.Model):
