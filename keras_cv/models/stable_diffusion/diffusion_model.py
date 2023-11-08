@@ -115,8 +115,8 @@ class DiffusionModel(keras.Model):
         #     )
         #     self.load_weights(diffusion_model_weights_fpath)
 
-        self.load_weights(weights_path)
-
+        if weights_path:
+            self.load_weights(weights_path)
 
 class DiffusionModelV2(keras.Model):
     def __init__(
