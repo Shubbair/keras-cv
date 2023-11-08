@@ -62,4 +62,5 @@ class ImageEncoder(keras.Sequential):
         #         file_hash="c60fb220a40d090e0f86a6ab4c312d113e115c87c40ff75d11ffcf380aab7ebb",  # noqa: E501
         #     )
             # self.load_weights(image_encoder_weights_fpath)
-        self.load_weights(weights_path)
+        if weights_path:
+            self.load_weights(weights_path)
