@@ -41,7 +41,8 @@ class TextEncoder(keras.Model):
         #     )
         #     self.load_weights(text_encoder_weights_fpath)
 
-        self.load_weights(weights_path)
+        if weights_path:
+            self.load_weights(weights_path)
 
 
 @keras_cv_export("keras_cv.models.stable_diffusion.TextEncoderV2")
